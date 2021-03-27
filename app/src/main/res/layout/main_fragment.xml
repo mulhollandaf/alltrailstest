@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.test.alltrailstest.MainViewModel"
+            />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainFragment">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:text="AllTrails At Lunch"/>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/search_bar"
+            android:text="@={viewModel.searchTerm}"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="Search for a restaurant"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="@id/search_bar"
+            app:layout_constraintStart_toEndOf="@id/search_bar"
+            android:onClick="@{() -> viewModel.startQuery()}"
+            android:text="Search"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/questionsView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
