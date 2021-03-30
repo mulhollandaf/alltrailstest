@@ -8,7 +8,6 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 import kotlinx.coroutines.flow.flowOn
@@ -31,12 +30,13 @@ class MainViewModel
         return restaurantRepository.getRestaurants(searchTerm.get() ?: "", latestLatitude, latestLongitude, force)
             .mapLatest {
                 val data = it.dataOrNull()
-                if (data != null) {
+                if (data == null) {
+                    emptyList()
+                } else {
                     force = false
+                    data
                 }
-                data
             }
-            .filterNotNull()
             .distinctUntilChanged()
             .flowOn(Dispatchers.IO)
     }

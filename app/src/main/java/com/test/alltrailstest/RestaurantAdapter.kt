@@ -31,10 +31,6 @@ class RestaurantAdapter(private val mainViewModel: MainViewModel) : RecyclerView
     override fun getItemCount(): Int {
         return restaurantInfos.size
     }
-
-    fun clear() {
-        restaurantInfos = emptyList()
-    }
 }
 
 open class BindingViewHolder<out T : ViewDataBinding>

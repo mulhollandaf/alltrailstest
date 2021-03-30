@@ -99,9 +99,7 @@ class MainFragment : Fragment() {
             Toast.makeText(requireContext(), "No Location", Toast.LENGTH_SHORT).show()
             return
         }
-        //TODO clear data when making a new query
-        restaurantAdapter.clear()
-        restaurantAdapter.notifyDataSetChanged()
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.queryRestaurants().collect {
                 restaurantAdapter.restaurantInfos = it
@@ -135,7 +133,4 @@ class MainFragment : Fragment() {
         binding.questionsView.layoutManager = LinearLayoutManager(requireContext())
         binding.questionsView.adapter = restaurantAdapter
     }
-
-
-
 }

@@ -31,34 +31,10 @@ class LocationUtils{
                 if (loc != null) {
                     Timber.d("SUCCESS Location $loc")
                     location.value = loc
-                } else {
-                    requestLocation()
                 }
             }
 
         return location
-    }
-
-    //TODO This doesn't really work
-    @SuppressLint("MissingPermission")
-    private fun requestLocation() {
-        Timber.d("Requesting Location")
-        val locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 10 * 1000
-        locationRequest.fastestInterval = 5 * 1000
-        val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                fusedLocationProviderClient.removeLocationUpdates(this)
-                for (loc in locationResult.locations) {
-                    if (loc != null) {
-                        Timber.d("Location result is $loc")
-                        location.value = loc
-                    }
-                }
-            }
-        }
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 
 }

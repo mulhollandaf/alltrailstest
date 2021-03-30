@@ -12,7 +12,6 @@ interface Api {
     : Response<RestaurantsDto>
 
     companion object {
-        //TODO REMOVE
-        const val apiKey = ""
+        const val apiKey = apiSecretKey
     }
 }
